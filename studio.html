@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Clawd studio</title>
+<title>Clawd & Treco studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=block">
 <style>
   html, body { margin: 0; background: #1b1820; color: #eee; font: 13px system-ui, sans-serif; }
@@ -25,14 +25,22 @@
 <script src="src/config.js"></script>
 <script src="src/core.js"></script>
 <script src="src/clawd.js"></script>
+<script src="src/treco.js"></script>
 <script src="src/timeline.js"></script>
 <!-- reference sheets (standalone loops) -->
 <script src="src/sheets.js"></script>
 <!-- your video: add a script per scene file, in order -->
 <script src="src/scenes/demo.js"></script>
 <script>
-  // Open studio.html?loop=emotions (or views) to scrub a standalone loop instead of the video.
-  const q = new URLSearchParams(location.search).get('loop'); if (q && LOOPS[q]) window.LOOP = LOOPS[q];
+  // Open studio.html?loop=emotions (or views, or treco_emotions, treco_views).
+  // Add ?char=treco to view Treco on standard loops (?loop=emotions&char=treco).
+  const sp = new URLSearchParams(location.search);
+  let q = sp.get('loop');
+  const ch = sp.get('char');
+  if (ch === 'treco' && q && !q.startsWith('treco_')) {
+    q = 'treco_' + q;
+  }
+  if (q && LOOPS[q]) window.LOOP = LOOPS[q];
 </script>
 </body>
 </html>
